@@ -1,12 +1,11 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 
-#include <SFML/Graphics.hpp>
+#include <DirectXMath.h>
 
 struct Particle {
-    sf::Vector2f position;
-    sf::Vector2f velocity;
-    sf::Color color;
+    DirectX::XMFLOAT2 position;
+    DirectX::XMFLOAT2 velocity;
     float density;
     float pressure;
 };

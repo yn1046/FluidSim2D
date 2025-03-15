@@ -1,0 +1,15 @@
+{
+    "entryPoints": {
+      "vertex.hlsl": "vs_main",
+      "pixel.hlsl": "ps_main",
+      "compute.hlsl": "cs_main"
+    },
+    "targetProfiles": {
+      "vertex.hlsl": "vs_5_0",
+      "pixel.hlsl": "ps_5_0",
+      "compute.hlsl": "cs_5_0"
+    },
+    "includePaths": [
+      "shaders"
+    ]
+  }
