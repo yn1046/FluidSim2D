@@ -8,9 +8,9 @@
 class Simulation {
 public:
     Simulation();
-    void update(float dt); // Обновление состояния частиц
-    const std::vector<Particle>& getParticles() const; // Получение частиц для рендеринга
-    void spawnParticles(sf::Vector2f position, sf::Color color); // Генерация частиц
+    void update(float dt, bool isLeftMousePressed, sf::Vector2f mousePosition); // Добавляем параметры для мыши
+    const std::vector<Particle>& getParticles() const;
+    void spawnParticles(sf::Vector2f position, sf::Color color); // Убираем, так как логика изменится
 
 private:
     std::vector<Particle> particles;
@@ -34,6 +34,10 @@ private:
     void updateForces(float dt);
     void integrate(float dt);
     void handleBoundaryCollisions();
+
+    // Параметры для спавна частиц
+    const float SPAWN_RADIUS = 10.0f; // Радиус круга для спавна частиц
+    const int MAX_PARTICLES_PER_FRAME = 5; // Максимальное количество частиц за кадр
 };
 
 #endif

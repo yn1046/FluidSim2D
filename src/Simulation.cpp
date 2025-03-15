@@ -83,7 +83,23 @@ std::vector<int> Simulation::Grid::getNeighbors(sf::Vector2f pos) const {
 // Конструктор симуляции
 Simulation::Simulation() : grid(1024, 768, KERNEL_RADIUS) {}
 
-void Simulation::update(float dt) {
+void Simulation::update(float dt, bool isLeftMousePressed, sf::Vector2f mousePosition) {
+    if (isLeftMousePressed) {
+        // Создаём частицы в круге вокруг позиции курсора
+        for (int i = 0; i < MAX_PARTICLES_PER_FRAME; ++i) {
+            float angle = static_cast<float>(rand()) / RAND_MAX * 2 * std::numbers::pi; // Случайный угол
+            float radius = static_cast<float>(rand()) / RAND_MAX * SPAWN_RADIUS; // Случайный радиус
+            sf::Vector2f offset(radius * std::cos(angle), radius * std::sin(angle));
+            sf::Vector2f spawnPosition = mousePosition + offset;
+
+            Particle p;
+            p.position = spawnPosition;
+            p.velocity = { 0.0f, 100.0f }; // Начальная скорость вниз
+            p.color = sf::Color::Blue; // Цвет частиц
+            particles.push_back(p);
+        }
+    }
+
     updateGrid();
     updateDensity();
     updateForces(dt);
@@ -102,8 +118,11 @@ void Simulation::spawnParticles(sf::Vector2f position, sf::Color color) {
 
     for (int i = 0; i < 10; ++i) {
         Particle p;
-        p.position = position;
-        p.velocity = { 0, 0 };
+        // Добавляем небольшое случайное смещение по горизонтали
+        p.position.x = position.x + (rand() % 10 - 5); // Смещение от -5 до +5
+        p.position.y = position.y;
+        // Начальная скорость вниз
+        p.velocity = { 0.0f, 100.0f }; // Скорость вниз
         p.color = color;
         particles.push_back(p);
     }
