@@ -19,5 +19,5 @@ project being the first step.
 - [ ] Parallel physics calculation
 - [ ] Parallel rendering
 - [ ] Use GPU (Cuda/Compute Shaders/P)
-- [ ] Reduce the checks of neighbours for each particle (use Uniform Grid or KD-Tree)
+- [x] Reduce the checks of neighbours for each particle (using Uniform Grid)
 - [ ] Write a full game engine and add this as a module :D
